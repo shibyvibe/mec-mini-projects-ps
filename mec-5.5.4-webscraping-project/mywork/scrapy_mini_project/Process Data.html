@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Mini_Project_Wrangling_Json_Exercise</title>
+<title>Process Data</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13079,88 +13079,14 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="JSON-examples-and-exercise">JSON examples and exercise<a class="anchor-link" href="#JSON-examples-and-exercise">&#182;</a></h1><hr>
-<ul>
-<li>get familiar with packages for dealing with JSON</li>
-<li>study examples with JSON strings and files </li>
-<li>work on exercise to be completed and submitted </li>
-</ul>
-<hr>
-<ul>
-<li>reference: <a href="http://pandas.pydata.org/pandas-docs/stable/io.html#io-json-reader">http://pandas.pydata.org/pandas-docs/stable/io.html#io-json-reader</a></li>
-<li>data source: <a href="http://jsonstudio.com/resources/">http://jsonstudio.com/resources/</a></li>
-</ul>
-<hr>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[245]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="imports-for-Python,-Pandas">imports for Python, Pandas<a class="anchor-link" href="#imports-for-Python,-Pandas">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="c1">#from pandas.io.json import json_normalize</span>
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">json_normalize</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="JSON-example,-with-string">JSON example, with string<a class="anchor-link" href="#JSON-example,-with-string">&#182;</a></h2><ul>
-<li>demonstrates creation of normalized dataframes (tables) from nested json string</li>
-<li>source: <a href="http://pandas.pydata.org/pandas-docs/stable/io.html#normalization">http://pandas.pydata.org/pandas-docs/stable/io.html#normalization</a></li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># define json string</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;Florida&#39;</span><span class="p">,</span> 
-         <span class="s1">&#39;shortname&#39;</span><span class="p">:</span> <span class="s1">&#39;FL&#39;</span><span class="p">,</span>
-         <span class="s1">&#39;info&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;governor&#39;</span><span class="p">:</span> <span class="s1">&#39;Rick Scott&#39;</span><span class="p">},</span>
-         <span class="s1">&#39;counties&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Dade&#39;</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">},</span>
-                      <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Broward&#39;</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">:</span> <span class="mi">40000</span><span class="p">},</span>
-                      <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Palm Beach&#39;</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">:</span> <span class="mi">60000</span><span class="p">}]},</span>
-        <span class="p">{</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;Ohio&#39;</span><span class="p">,</span>
-         <span class="s1">&#39;shortname&#39;</span><span class="p">:</span> <span class="s1">&#39;OH&#39;</span><span class="p">,</span>
-         <span class="s1">&#39;info&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;governor&#39;</span><span class="p">:</span> <span class="s1">&#39;John Kasich&#39;</span><span class="p">},</span>
-         <span class="s1">&#39;counties&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Summit&#39;</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">:</span> <span class="mi">1234</span><span class="p">},</span>
-                      <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Cuyahoga&#39;</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">:</span> <span class="mi">1337</span><span class="p">}]}]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">contextlib</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 
     </div>
@@ -13170,11 +13096,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[246]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># use normalization to create tables from nested element</span>
-<span class="n">json_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;counties&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">&quot;css-scraper-results.json&quot;</span><span class="p">)</span>
+<span class="n">data</span>
 </pre></div>
 
     </div>
@@ -13187,7 +13113,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[246]:</div>
 
 
 
@@ -13210,774 +13136,158 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>name</th>
-      <th>population</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Dade</td>
-      <td>12345</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Broward</td>
-      <td>40000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Palm Beach</td>
-      <td>60000</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Summit</td>
-      <td>1234</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Cuyahoga</td>
-      <td>1337</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># further populate tables created from nested element</span>
-<span class="n">json_normalize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;counties&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;shortname&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;governor&#39;</span><span class="p">]])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>name</th>
-      <th>population</th>
-      <th>state</th>
-      <th>shortname</th>
-      <th>info.governor</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Dade</td>
-      <td>12345</td>
-      <td>Florida</td>
-      <td>FL</td>
-      <td>Rick Scott</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Broward</td>
-      <td>40000</td>
-      <td>Florida</td>
-      <td>FL</td>
-      <td>Rick Scott</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Palm Beach</td>
-      <td>60000</td>
-      <td>Florida</td>
-      <td>FL</td>
-      <td>Rick Scott</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Summit</td>
-      <td>1234</td>
-      <td>Ohio</td>
-      <td>OH</td>
-      <td>John Kasich</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Cuyahoga</td>
-      <td>1337</td>
-      <td>Ohio</td>
-      <td>OH</td>
-      <td>John Kasich</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-<h2 id="JSON-example,-with-file">JSON example, with file<a class="anchor-link" href="#JSON-example,-with-file">&#182;</a></h2><ul>
-<li>demonstrates reading in a json file as a string and as a table</li>
-<li>uses small sample file containing data about projects funded by the World Bank </li>
-<li>data source: <a href="http://jsonstudio.com/resources/">http://jsonstudio.com/resources/</a></li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load json as string</span>
-<span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">((</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/world_bank_projects_less.json&#39;</span><span class="p">)))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[6]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[{&#39;_id&#39;: {&#39;$oid&#39;: &#39;52b213b38594d8a2be17c780&#39;},
-  &#39;approvalfy&#39;: 1999,
-  &#39;board_approval_month&#39;: &#39;November&#39;,
-  &#39;boardapprovaldate&#39;: &#39;2013-11-12T00:00:00Z&#39;,
-  &#39;borrower&#39;: &#39;FEDERAL DEMOCRATIC REPUBLIC OF ETHIOPIA&#39;,
-  &#39;closingdate&#39;: &#39;2018-07-07T00:00:00Z&#39;,
-  &#39;country_namecode&#39;: &#39;Federal Democratic Republic of Ethiopia!$!ET&#39;,
-  &#39;countrycode&#39;: &#39;ET&#39;,
-  &#39;countryname&#39;: &#39;Federal Democratic Republic of Ethiopia&#39;,
-  &#39;countryshortname&#39;: &#39;Ethiopia&#39;,
-  &#39;docty&#39;: &#39;Project Information Document,Indigenous Peoples Plan,Project Information Document&#39;,
-  &#39;envassesmentcategorycode&#39;: &#39;C&#39;,
-  &#39;grantamt&#39;: 0,
-  &#39;ibrdcommamt&#39;: 0,
-  &#39;id&#39;: &#39;P129828&#39;,
-  &#39;idacommamt&#39;: 130000000,
-  &#39;impagency&#39;: &#39;MINISTRY OF EDUCATION&#39;,
-  &#39;lendinginstr&#39;: &#39;Investment Project Financing&#39;,
-  &#39;lendinginstrtype&#39;: &#39;IN&#39;,
-  &#39;lendprojectcost&#39;: 550000000,
-  &#39;majorsector_percent&#39;: [{&#39;Name&#39;: &#39;Education&#39;, &#39;Percent&#39;: 46},
-   {&#39;Name&#39;: &#39;Education&#39;, &#39;Percent&#39;: 26},
-   {&#39;Name&#39;: &#39;Public Administration, Law, and Justice&#39;, &#39;Percent&#39;: 16},
-   {&#39;Name&#39;: &#39;Education&#39;, &#39;Percent&#39;: 12}],
-  &#39;mjsector_namecode&#39;: [{&#39;name&#39;: &#39;Education&#39;, &#39;code&#39;: &#39;EX&#39;},
-   {&#39;name&#39;: &#39;Education&#39;, &#39;code&#39;: &#39;EX&#39;},
-   {&#39;name&#39;: &#39;Public Administration, Law, and Justice&#39;, &#39;code&#39;: &#39;BX&#39;},
-   {&#39;name&#39;: &#39;Education&#39;, &#39;code&#39;: &#39;EX&#39;}],
-  &#39;mjtheme&#39;: [&#39;Human development&#39;],
-  &#39;mjtheme_namecode&#39;: [{&#39;name&#39;: &#39;Human development&#39;, &#39;code&#39;: &#39;8&#39;},
-   {&#39;name&#39;: &#39;&#39;, &#39;code&#39;: &#39;11&#39;}],
-  &#39;mjthemecode&#39;: &#39;8,11&#39;,
-  &#39;prodline&#39;: &#39;PE&#39;,
-  &#39;prodlinetext&#39;: &#39;IBRD/IDA&#39;,
-  &#39;productlinetype&#39;: &#39;L&#39;,
-  &#39;project_abstract&#39;: {&#39;cdata&#39;: &#39;The development objective of the Second Phase of General Education Quality Improvement Project for Ethiopia is to improve learning conditions in primary and secondary schools and strengthen institutions at different levels of educational administration. The project has six components. The first component is curriculum, textbooks, assessment, examinations, and inspection. This component will support improvement of learning conditions in grades KG-12 by providing increased access to teaching and learning materials and through improvements to the curriculum by assessing the strengths and weaknesses of the current curriculum. This component has following four sub-components: (i) curriculum reform and implementation; (ii) teaching and learning materials; (iii) assessment and examinations; and (iv) inspection. The second component is teacher development program (TDP). This component will support improvements in learning conditions in both primary and secondary schools by advancing the quality of teaching in general education through: (a) enhancing the training of pre-service teachers in teacher education institutions; and (b) improving the quality of in-service teacher training. This component has following three sub-components: (i) pre-service teacher training; (ii) in-service teacher training; and (iii) licensing and relicensing of teachers and school leaders. The third component is school improvement plan. This component will support the strengthening of school planning in order to improve learning outcomes, and to partly fund the school improvement plans through school grants. It has following two sub-components: (i) school improvement plan; and (ii) school grants. The fourth component is management and capacity building, including education management information systems (EMIS). This component will support management and capacity building aspect of the project. This component has following three sub-components: (i) capacity building for education planning and management; (ii) capacity building for school planning and management; and (iii) EMIS. The fifth component is improving the quality of learning and teaching in secondary schools and universities through the use of information and communications technology (ICT). It has following five sub-components: (i) national policy and institution for ICT in general education; (ii) national ICT infrastructure improvement plan for general education; (iii) develop an integrated monitoring, evaluation, and learning system specifically for the ICT component; (iv) teacher professional development in the use of ICT; and (v) provision of limited number of e-Braille display readers with the possibility to scale up to all secondary education schools based on the successful implementation and usage of the readers. The sixth component is program coordination, monitoring and evaluation, and communication. It will support institutional strengthening by developing capacities in all aspects of program coordination, monitoring and evaluation; a new sub-component on communications will support information sharing for better management and accountability. It has following three sub-components: (i) program coordination; (ii) monitoring and evaluation (M and E); and (iii) communication.&#39;},
-  &#39;project_name&#39;: &#39;Ethiopia General Education Quality Improvement Project II&#39;,
-  &#39;projectdocs&#39;: [{&#39;DocTypeDesc&#39;: &#39;Project Information Document (PID),  Vol.&#39;,
-    &#39;DocType&#39;: &#39;PID&#39;,
-    &#39;EntityID&#39;: &#39;090224b081e545fb_1_0&#39;,
-    &#39;DocURL&#39;: &#39;http://www-wds.worldbank.org/servlet/WDSServlet?pcont=details&amp;eid=090224b081e545fb_1_0&#39;,
-    &#39;DocDate&#39;: &#39;28-AUG-2013&#39;},
-   {&#39;DocTypeDesc&#39;: &#39;Indigenous Peoples Plan (IP),  Vol.1 of 1&#39;,
-    &#39;DocType&#39;: &#39;IP&#39;,
-    &#39;EntityID&#39;: &#39;000442464_20130920111729&#39;,
-    &#39;DocURL&#39;: &#39;http://www-wds.worldbank.org/servlet/WDSServlet?pcont=details&amp;eid=000442464_20130920111729&#39;,
-    &#39;DocDate&#39;: &#39;01-JUL-2013&#39;},
-   {&#39;DocTypeDesc&#39;: &#39;Project Information Document (PID),  Vol.&#39;,
-    &#39;DocType&#39;: &#39;PID&#39;,
-    &#39;EntityID&#39;: &#39;090224b0817b19e2_1_0&#39;,
-    &#39;DocURL&#39;: &#39;http://www-wds.worldbank.org/servlet/WDSServlet?pcont=details&amp;eid=090224b0817b19e2_1_0&#39;,
-    &#39;DocDate&#39;: &#39;22-NOV-2012&#39;}],
-  &#39;projectfinancialtype&#39;: &#39;IDA&#39;,
-  &#39;projectstatusdisplay&#39;: &#39;Active&#39;,
-  &#39;regionname&#39;: &#39;Africa&#39;,
-  &#39;sector&#39;: [{&#39;Name&#39;: &#39;Primary education&#39;},
-   {&#39;Name&#39;: &#39;Secondary education&#39;},
-   {&#39;Name&#39;: &#39;Public administration- Other social services&#39;},
-   {&#39;Name&#39;: &#39;Tertiary education&#39;}],
-  &#39;sector1&#39;: {&#39;Name&#39;: &#39;Primary education&#39;, &#39;Percent&#39;: 46},
-  &#39;sector2&#39;: {&#39;Name&#39;: &#39;Secondary education&#39;, &#39;Percent&#39;: 26},
-  &#39;sector3&#39;: {&#39;Name&#39;: &#39;Public administration- Other social services&#39;,
-   &#39;Percent&#39;: 16},
-  &#39;sector4&#39;: {&#39;Name&#39;: &#39;Tertiary education&#39;, &#39;Percent&#39;: 12},
-  &#39;sector_namecode&#39;: [{&#39;name&#39;: &#39;Primary education&#39;, &#39;code&#39;: &#39;EP&#39;},
-   {&#39;name&#39;: &#39;Secondary education&#39;, &#39;code&#39;: &#39;ES&#39;},
-   {&#39;name&#39;: &#39;Public administration- Other social services&#39;, &#39;code&#39;: &#39;BS&#39;},
-   {&#39;name&#39;: &#39;Tertiary education&#39;, &#39;code&#39;: &#39;ET&#39;}],
-  &#39;sectorcode&#39;: &#39;ET,BS,ES,EP&#39;,
-  &#39;source&#39;: &#39;IBRD&#39;,
-  &#39;status&#39;: &#39;Active&#39;,
-  &#39;supplementprojectflg&#39;: &#39;N&#39;,
-  &#39;theme1&#39;: {&#39;Name&#39;: &#39;Education for all&#39;, &#39;Percent&#39;: 100},
-  &#39;theme_namecode&#39;: [{&#39;name&#39;: &#39;Education for all&#39;, &#39;code&#39;: &#39;65&#39;}],
-  &#39;themecode&#39;: &#39;65&#39;,
-  &#39;totalamt&#39;: 130000000,
-  &#39;totalcommamt&#39;: 130000000,
-  &#39;url&#39;: &#39;http://www.worldbank.org/projects/P129828/ethiopia-general-education-quality-improvement-project-ii?lang=en&#39;},
- {&#39;_id&#39;: {&#39;$oid&#39;: &#39;52b213b38594d8a2be17c781&#39;},
-  &#39;approvalfy&#39;: 2015,
-  &#39;board_approval_month&#39;: &#39;November&#39;,
-  &#39;boardapprovaldate&#39;: &#39;2013-11-04T00:00:00Z&#39;,
-  &#39;borrower&#39;: &#39;GOVERNMENT OF TUNISIA&#39;,
-  &#39;country_namecode&#39;: &#39;Republic of Tunisia!$!TN&#39;,
-  &#39;countrycode&#39;: &#39;TN&#39;,
-  &#39;countryname&#39;: &#39;Republic of Tunisia&#39;,
-  &#39;countryshortname&#39;: &#39;Tunisia&#39;,
-  &#39;docty&#39;: &#39;Project Information Document,Integrated Safeguards Data Sheet,Integrated Safeguards Data Sheet,Project Information Document,Integrated Safeguards Data Sheet,Project Information Document&#39;,
-  &#39;envassesmentcategorycode&#39;: &#39;C&#39;,
-  &#39;grantamt&#39;: 4700000,
-  &#39;ibrdcommamt&#39;: 0,
-  &#39;id&#39;: &#39;P144674&#39;,
-  &#39;idacommamt&#39;: 0,
-  &#39;impagency&#39;: &#39;MINISTRY OF FINANCE&#39;,
-  &#39;lendinginstr&#39;: &#39;Specific Investment Loan&#39;,
-  &#39;lendinginstrtype&#39;: &#39;IN&#39;,
-  &#39;lendprojectcost&#39;: 5700000,
-  &#39;majorsector_percent&#39;: [{&#39;Name&#39;: &#39;Public Administration, Law, and Justice&#39;,
-    &#39;Percent&#39;: 70},
-   {&#39;Name&#39;: &#39;Public Administration, Law, and Justice&#39;, &#39;Percent&#39;: 30}],
-  &#39;mjsector_namecode&#39;: [{&#39;name&#39;: &#39;Public Administration, Law, and Justice&#39;,
-    &#39;code&#39;: &#39;BX&#39;},
-   {&#39;name&#39;: &#39;Public Administration, Law, and Justice&#39;, &#39;code&#39;: &#39;BX&#39;}],
-  &#39;mjtheme&#39;: [&#39;Economic management&#39;, &#39;Social protection and risk management&#39;],
-  &#39;mjtheme_namecode&#39;: [{&#39;name&#39;: &#39;Economic management&#39;, &#39;code&#39;: &#39;1&#39;},
-   {&#39;name&#39;: &#39;Social protection and risk management&#39;, &#39;code&#39;: &#39;6&#39;}],
-  &#39;mjthemecode&#39;: &#39;1,6&#39;,
-  &#39;prodline&#39;: &#39;RE&#39;,
-  &#39;prodlinetext&#39;: &#39;Recipient Executed Activities&#39;,
-  &#39;productlinetype&#39;: &#39;L&#39;,
-  &#39;project_name&#39;: &#39;TN: DTF Social Protection Reforms Support&#39;,
-  &#39;projectdocs&#39;: [{&#39;DocTypeDesc&#39;: &#39;Project Information Document (PID),  Vol.1 of 1&#39;,
-    &#39;DocType&#39;: &#39;PID&#39;,
-    &#39;EntityID&#39;: &#39;000333037_20131024115616&#39;,
-    &#39;DocURL&#39;: &#39;http://www-wds.worldbank.org/servlet/WDSServlet?pcont=details&amp;eid=000333037_20131024115616&#39;,
-    &#39;DocDate&#39;: &#39;29-MAR-2013&#39;},
-   {&#39;DocTypeDesc&#39;: &#39;Integrated Safeguards Data Sheet (ISDS),  Vol.1 of 1&#39;,
-    &#39;DocType&#39;: &#39;ISDS&#39;,
-    &#39;EntityID&#39;: &#39;000356161_20131024151611&#39;,
-    &#39;DocURL&#39;: &#39;http://www-wds.worldbank.org/servlet/WDSServlet?pcont=details&amp;eid=000356161_20131024151611&#39;,
-    &#39;DocDate&#39;: &#39;29-MAR-2013&#39;},
-   {&#39;DocTypeDesc&#39;: &#39;Integrated Safeguards Data Sheet (ISDS),  Vol.1 of 1&#39;,
-    &#39;DocType&#39;: &#39;ISDS&#39;,
-    &#39;EntityID&#39;: &#39;000442464_20131031112136&#39;,
-    &#39;DocURL&#39;: &#39;http://www-wds.worldbank.org/servlet/WDSServlet?pcont=details&amp;eid=000442464_20131031112136&#39;,
-    &#39;DocDate&#39;: &#39;29-MAR-2013&#39;},
-   {&#39;DocTypeDesc&#39;: &#39;Project Information Document (PID),  Vol.1 of 1&#39;,
-    &#39;DocType&#39;: &#39;PID&#39;,
-    &#39;EntityID&#39;: &#39;000333037_20131031105716&#39;,
-    &#39;DocURL&#39;: &#39;http://www-wds.worldbank.org/servlet/WDSServlet?pcont=details&amp;eid=000333037_20131031105716&#39;,
-    &#39;DocDate&#39;: &#39;29-MAR-2013&#39;},
-   {&#39;DocTypeDesc&#39;: &#39;Integrated Safeguards Data Sheet (ISDS),  Vol.1 of 1&#39;,
-    &#39;DocType&#39;: &#39;ISDS&#39;,
-    &#39;EntityID&#39;: &#39;000356161_20130305113209&#39;,
-    &#39;DocURL&#39;: &#39;http://www-wds.worldbank.org/servlet/WDSServlet?pcont=details&amp;eid=000356161_20130305113209&#39;,
-    &#39;DocDate&#39;: &#39;16-JAN-2013&#39;},
-   {&#39;DocTypeDesc&#39;: &#39;Project Information Document (PID),  Vol.1 of 1&#39;,
-    &#39;DocType&#39;: &#39;PID&#39;,
-    &#39;EntityID&#39;: &#39;000356161_20130305113716&#39;,
-    &#39;DocURL&#39;: &#39;http://www-wds.worldbank.org/servlet/WDSServlet?pcont=details&amp;eid=000356161_20130305113716&#39;,
-    &#39;DocDate&#39;: &#39;16-JAN-2013&#39;}],
-  &#39;projectfinancialtype&#39;: &#39;OTHER&#39;,
-  &#39;projectstatusdisplay&#39;: &#39;Active&#39;,
-  &#39;regionname&#39;: &#39;Middle East and North Africa&#39;,
-  &#39;sector&#39;: [{&#39;Name&#39;: &#39;Public administration- Other social services&#39;},
-   {&#39;Name&#39;: &#39;General public administration sector&#39;}],
-  &#39;sector1&#39;: {&#39;Name&#39;: &#39;Public administration- Other social services&#39;,
-   &#39;Percent&#39;: 70},
-  &#39;sector2&#39;: {&#39;Name&#39;: &#39;General public administration sector&#39;, &#39;Percent&#39;: 30},
-  &#39;sector_namecode&#39;: [{&#39;name&#39;: &#39;Public administration- Other social services&#39;,
-    &#39;code&#39;: &#39;BS&#39;},
-   {&#39;name&#39;: &#39;General public administration sector&#39;, &#39;code&#39;: &#39;BZ&#39;}],
-  &#39;sectorcode&#39;: &#39;BZ,BS&#39;,
-  &#39;source&#39;: &#39;IBRD&#39;,
-  &#39;status&#39;: &#39;Active&#39;,
-  &#39;supplementprojectflg&#39;: &#39;N&#39;,
-  &#39;theme1&#39;: {&#39;Name&#39;: &#39;Other economic management&#39;, &#39;Percent&#39;: 30},
-  &#39;theme_namecode&#39;: [{&#39;name&#39;: &#39;Other economic management&#39;, &#39;code&#39;: &#39;24&#39;},
-   {&#39;name&#39;: &#39;Social safety nets&#39;, &#39;code&#39;: &#39;54&#39;}],
-  &#39;themecode&#39;: &#39;54,24&#39;,
-  &#39;totalamt&#39;: 0,
-  &#39;totalcommamt&#39;: 4700000,
-  &#39;url&#39;: &#39;http://www.worldbank.org/projects/P144674?lang=en&#39;}]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load as Pandas dataframe</span>
-<span class="n">sample_json_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;data/world_bank_projects_less.json&#39;</span><span class="p">)</span>
-<span class="n">sample_json_df</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[7]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>_id</th>
-      <th>approvalfy</th>
-      <th>board_approval_month</th>
-      <th>boardapprovaldate</th>
-      <th>borrower</th>
-      <th>closingdate</th>
-      <th>country_namecode</th>
-      <th>countrycode</th>
-      <th>countryname</th>
-      <th>countryshortname</th>
-      <th>...</th>
-      <th>sectorcode</th>
       <th>source</th>
-      <th>status</th>
-      <th>supplementprojectflg</th>
-      <th>theme1</th>
-      <th>theme_namecode</th>
-      <th>themecode</th>
-      <th>totalamt</th>
-      <th>totalcommamt</th>
-      <th>url</th>
+      <th>text</th>
+      <th>author</th>
+      <th>tags</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>{'$oid': '52b213b38594d8a2be17c780'}</td>
-      <td>1999</td>
-      <td>November</td>
-      <td>2013-11-12T00:00:00Z</td>
-      <td>FEDERAL DEMOCRATIC REPUBLIC OF ETHIOPIA</td>
-      <td>2018-07-07T00:00:00Z</td>
-      <td>Federal Democratic Republic of Ethiopia!$!ET</td>
-      <td>ET</td>
-      <td>Federal Democratic Republic of Ethiopia</td>
-      <td>Ethiopia</td>
-      <td>...</td>
-      <td>ET,BS,ES,EP</td>
-      <td>IBRD</td>
-      <td>Active</td>
-      <td>N</td>
-      <td>{'Name': 'Education for all', 'Percent': 100}</td>
-      <td>[{'name': 'Education for all', 'code': '65'}]</td>
-      <td>65</td>
-      <td>130000000</td>
-      <td>130000000</td>
-      <td>http://www.worldbank.org/projects/P129828/ethi...</td>
+      <td>http://quotes.toscrape.com/page/1/</td>
+      <td>“The world as we have created it is a process ...</td>
+      <td>Albert Einstein</td>
+      <td>[change, deep-thoughts, thinking, world]</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>{'$oid': '52b213b38594d8a2be17c781'}</td>
-      <td>2015</td>
-      <td>November</td>
-      <td>2013-11-04T00:00:00Z</td>
-      <td>GOVERNMENT OF TUNISIA</td>
-      <td>NaN</td>
-      <td>Republic of Tunisia!$!TN</td>
-      <td>TN</td>
-      <td>Republic of Tunisia</td>
-      <td>Tunisia</td>
-      <td>...</td>
-      <td>BZ,BS</td>
-      <td>IBRD</td>
-      <td>Active</td>
-      <td>N</td>
-      <td>{'Name': 'Other economic management', 'Percent...</td>
-      <td>[{'name': 'Other economic management', 'code':...</td>
-      <td>54,24</td>
-      <td>0</td>
-      <td>4700000</td>
-      <td>http://www.worldbank.org/projects/P144674?lang=en</td>
-    </tr>
-  </tbody>
-</table>
-<p>2 rows × 50 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-<h2 id="JSON-exercise">JSON exercise<a class="anchor-link" href="#JSON-exercise">&#182;</a></h2><p>Using data in file 'data/world_bank_projects.json' and the techniques demonstrated above,</p>
-<ol>
-<li>Find the 10 countries with most projects</li>
-<li>Find the top 10 major project themes (using column 'mjtheme_namecode')</li>
-<li>In 2. above you will notice that some entries have only the code and the name is missing. Create a dataframe with the missing names filled in.</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Find the 10 countries with most projects</span>
-<span class="n">projectData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;data/world_bank_projects.json&#39;</span><span class="p">)</span>
-<span class="n">projectData</span><span class="p">[</span><span class="s2">&quot;countrycode&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[8]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>CN    19
-ID    19
-VN    17
-IN    16
-RY    13
-BD    12
-NP    12
-MA    12
-MZ    11
-3A    11
-Name: countrycode, dtype: int64</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[152]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Find the top 10 major project themes (using column &#39;mjtheme_namecode&#39;) </span>
-
-<span class="c1"># ** Looks like a real poor approach is there a better way to do this</span>
-<span class="c1"># themes = projectData[&quot;mjtheme_namecode&quot;]</span>
-<span class="c1"># df = pd.DataFrame(columns=[&quot;code&quot;, &quot;name&quot;])</span>
-<span class="c1"># for x in themes.values:</span>
-<span class="c1">#     df = df.append(pd.DataFrame(x))  ### BAD creating too many intermediate objects.</span>
-
-<span class="c1">#Better code</span>
-<span class="n">themes</span> <span class="o">=</span> <span class="n">projectData</span><span class="p">[</span><span class="s2">&quot;mjtheme_namecode&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">explode</span><span class="p">()</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">themes</span><span class="p">))</span>
-<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;name&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;code&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[152]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>code</th>
+      <td>http://quotes.toscrape.com/page/1/</td>
+      <td>“It is our choices, Harry, that show what we t...</td>
+      <td>J.K. Rowling</td>
+      <td>[abilities, choices]</td>
     </tr>
     <tr>
-      <th>name</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Environment and natural resources management</th>
-      <td>223</td>
+      <th>2</th>
+      <td>http://quotes.toscrape.com/page/1/</td>
+      <td>“There are only two ways to live your life. On...</td>
+      <td>Albert Einstein</td>
+      <td>[inspirational, life, live, miracle, miracles]</td>
     </tr>
     <tr>
-      <th>Rural development</th>
-      <td>202</td>
+      <th>3</th>
+      <td>http://quotes.toscrape.com/page/1/</td>
+      <td>“The person, be it gentleman or lady, who has ...</td>
+      <td>Jane Austen</td>
+      <td>[aliteracy, books, classic, humor]</td>
     </tr>
     <tr>
-      <th>Human development</th>
-      <td>197</td>
-    </tr>
-    <tr>
-      <th>Public sector governance</th>
-      <td>184</td>
-    </tr>
-    <tr>
-      <th>Social protection and risk management</th>
-      <td>158</td>
-    </tr>
-    <tr>
-      <th>Financial and private sector development</th>
-      <td>130</td>
-    </tr>
-    <tr>
-      <th></th>
-      <td>122</td>
-    </tr>
-    <tr>
-      <th>Social dev/gender/inclusion</th>
-      <td>119</td>
-    </tr>
-    <tr>
-      <th>Trade and integration</th>
-      <td>72</td>
-    </tr>
-    <tr>
-      <th>Urban development</th>
-      <td>47</td>
-    </tr>
-    <tr>
-      <th>Economic management</th>
-      <td>33</td>
-    </tr>
-    <tr>
-      <th>Rule of law</th>
-      <td>12</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[156]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#In 2. above you will notice that some entries have only the code and the name is missing. Create a dataframe with the missing names filled in.</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">df</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[156]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>code</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>53</th>
-      <td>9</td>
-      <td>Urban development</td>
-    </tr>
-    <tr>
-      <th>183</th>
-      <td>9</td>
-      <td>Urban development</td>
-    </tr>
-    <tr>
-      <th>194</th>
-      <td>9</td>
-      <td>Urban development</td>
-    </tr>
-    <tr>
-      <th>200</th>
-      <td>9</td>
-      <td>Urban development</td>
-    </tr>
-    <tr>
-      <th>318</th>
-      <td>9</td>
-      <td>Urban development</td>
+      <th>4</th>
+      <td>http://quotes.toscrape.com/page/1/</td>
+      <td>“Imperfection is beauty, madness is genius and...</td>
+      <td>Marilyn Monroe</td>
+      <td>[be-yourself, inspirational]</td>
     </tr>
     <tr>
       <th>...</th>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>212</th>
-      <td>1</td>
-      <td>Economic management</td>
+      <th>95</th>
+      <td>http://quotes.toscrape.com/page/10/</td>
+      <td>“You never really understand a person until yo...</td>
+      <td>Harper Lee</td>
+      <td>[better-life-empathy]</td>
     </tr>
     <tr>
-      <th>363</th>
-      <td>1</td>
-      <td>Economic management</td>
+      <th>96</th>
+      <td>http://quotes.toscrape.com/page/10/</td>
+      <td>“You have to write the book that wants to be w...</td>
+      <td>Madeleine L'Engle</td>
+      <td>[books, children, difficult, grown-ups, write,...</td>
     </tr>
     <tr>
-      <th>1024</th>
-      <td>1</td>
-      <td>Economic management</td>
+      <th>97</th>
+      <td>http://quotes.toscrape.com/page/10/</td>
+      <td>“Never tell the truth to people who are not wo...</td>
+      <td>Mark Twain</td>
+      <td>[truth]</td>
     </tr>
     <tr>
-      <th>1114</th>
-      <td>1</td>
-      <td>Economic management</td>
+      <th>98</th>
+      <td>http://quotes.toscrape.com/page/10/</td>
+      <td>“A person's a person, no matter how small.”</td>
+      <td>Dr. Seuss</td>
+      <td>[inspirational]</td>
     </tr>
     <tr>
-      <th>1437</th>
-      <td>1</td>
-      <td>Economic management</td>
+      <th>99</th>
+      <td>http://quotes.toscrape.com/page/10/</td>
+      <td>“... a mind needs books as a sword needs a whe...</td>
+      <td>George R.R. Martin</td>
+      <td>[books, mind]</td>
     </tr>
   </tbody>
 </table>
-<p>1499 rows × 2 columns</p>
+<p>100 rows × 4 columns</p>
 </div>
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[248]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<span class="k">def</span> <span class="nf">dbconnection_mgr</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;Unit554.db&quot;</span><span class="p">):</span>
+    <span class="n">con</span> <span class="o">=</span>  <span class="n">sqlite3</span><span class="o">.</span><span class="n">Connection</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">con</span>
+    <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">dbconnection_mgr</span><span class="p">()</span> <span class="k">as</span> <span class="n">c</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">saveRows</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">dataTupleList</span><span class="p">):</span>  <span class="c1"># bulk inserts rows</span>
+        <span class="k">with</span> <span class="n">c</span> <span class="k">as</span> <span class="n">cur</span><span class="p">:</span>
+            <span class="n">cur</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">dataTupleList</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">saveRow</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">dataTuple</span><span class="p">):</span>  <span class="c1"># saves a single row and return the row id</span>
+        <span class="k">with</span> <span class="n">c</span> <span class="k">as</span> <span class="n">cur</span><span class="p">:</span>
+            <span class="n">_cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">_cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">dataTuple</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_cur</span><span class="o">.</span><span class="n">lastrowid</span>
+    
+    <span class="k">def</span> <span class="nf">saveAuthors</span><span class="p">(</span><span class="n">data</span><span class="p">):</span> <span class="c1"># Saving unique Authors</span>
+        <span class="n">saveRows</span><span class="p">(</span><span class="s2">&quot;insert into Authors(&#39;name&#39;) values(?) on conflict(name) do nothing;&quot;</span><span class="p">,</span>  <span class="p">[(</span><span class="n">author</span><span class="p">,)</span> <span class="k">for</span> <span class="n">author</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;author&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()])</span>
+    
+    <span class="k">def</span> <span class="nf">saveTags</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>  <span class="c1"># Saving unique tags</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_tags</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]:</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">_tags</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;str&quot;</span><span class="p">))</span>  
+        <span class="n">saveRows</span><span class="p">(</span><span class="s2">&quot;insert into Tags(&#39;name&#39;) values (?) on conflict(name) do nothing;&quot;</span><span class="p">,</span>  <span class="p">[(</span><span class="n">tag</span><span class="p">,)</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="o">.</span><span class="n">unique</span><span class="p">()])</span>
+
+    <span class="k">def</span> <span class="nf">saveAuthors_QuoteswithTags</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="n">quotes_Sql</span> <span class="o">=</span> <span class="s2">&quot;insert into Authors_Quotes(author_id, descr) values((select author_id from Authors where name=?), ?)&quot;</span><span class="p">;</span>
+        <span class="n">quotes_tags_Sql</span> <span class="o">=</span> <span class="s2">&quot;insert into Author_Quotes_Tagged (quote_id, tag_id) select ?, tag_id from tags where name in (?)&quot;</span><span class="p">;</span>
+        
+        <span class="c1"># Save Author quotes</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[[</span><span class="s2">&quot;author&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="c1"># returns an array of tupes. On tuple per column</span>
+        <span class="k">for</span> <span class="n">author</span><span class="p">,</span> <span class="n">quote</span><span class="p">,</span> <span class="n">tags</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">quote_id</span> <span class="o">=</span> <span class="n">saveRow</span><span class="p">(</span><span class="n">quotes_Sql</span><span class="p">,</span> <span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="n">quote</span><span class="p">))</span> <span class="c1"># Save Author quotes</span>
+            <span class="n">quote_tag_id</span> <span class="o">=</span> <span class="p">[(</span><span class="n">quote_id</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">]</span>
+            <span class="n">saveRows</span><span class="p">(</span><span class="n">quotes_tags_Sql</span><span class="p">,</span><span class="n">quote_tag_id</span><span class="p">)</span>  <span class="c1"># Save Quotes and tags relationship</span>
+        
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      4 tables </span>
+<span class="sd">      Authors - store unique list of authors</span>
+<span class="sd">      Tags - maintains unique list of tags</span>
+<span class="sd">      Author_Quotes - maintains quotes by author id</span>
+<span class="sd">      Author_Quotes_Tagged - maintains a relation of Author_quote_ids and tag ids</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">saveAuthors</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Save to Authors table - maintains unique list of Authors</span>
+    <span class="n">saveTags</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>     <span class="c1"># Save to Tags table - maintains unique list of Tags</span>
+    <span class="n">saveAuthors_QuoteswithTags</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># Save to Quotes for each author in table Authors_Quotes &amp; maintains the quote and tag relationship in table Author_Quotes_Tagged</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
