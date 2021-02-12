@@ -1,0 +1,4 @@
+Contains the databricks Jupyter notebook for reading a large CVS using SPARK Dataframes and performing data wrangling and then saving it as a cleansed CSV or JSON file.
+
+Mini_Project_Data_Wrangling_at_Scale_with_Spark.ipynb - the completed notebook source.
+The input data files used for processing are uploaded as zip files.
